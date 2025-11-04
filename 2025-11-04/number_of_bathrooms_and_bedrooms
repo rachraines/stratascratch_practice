@@ -1,0 +1,14 @@
+/*
+Task ID 9622 - Number of Bathrooms and Bedrooms: 
+Find the average number of bathrooms and bedrooms for each city’s property types. 
+Output the result along with the city name and the property type.
+*/
+
+SELECT 
+    property_type, 
+    city,
+    AVG(bathrooms) AS avg_baths,
+    AVG(bedrooms) AS avg_beds
+FROM airbnb_search_details
+GROUP BY property_type, city
+ORDER BY property_type;
