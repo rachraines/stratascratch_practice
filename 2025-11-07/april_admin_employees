@@ -1,0 +1,9 @@
+/*
+Task ID 9845 - April Admin Employees: 
+Find the number of employees working in the Admin department that joined in April or later, in any year.
+*/
+
+SELECT COUNT(*) AS num_admin 
+FROM worker
+WHERE department = 'Admin'
+    AND SUBSTRING(joining_date, 6, 2) >= 04;
