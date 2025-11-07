@@ -1,0 +1,18 @@
+/*
+Task ID 10322 - Finding User Purchases: 
+Identify returning active users by finding users who made a second purchase within 1 to 7 days after their first purchase. 
+Ignore same-day purchases. Output a list of these user_ids.
+*/
+
+WITH ranked AS (
+    SELECT *,
+    RANK() OVER (PARTITION BY user_id ORDER BY created_at) as purchase_num
+    FROM amazon_transactions
+)
+SELECT r1.user_id
+FROM ranked r1
+JOIN ranked r2
+ON r2.user_id = r1.user_id
+WHERE r1.purchase_num = 1
+    AND r2.purchase_num = 2
+    AND DATEDIFF(r2.created_at, r1.created_at) BETWEEN 1 AND 7;
